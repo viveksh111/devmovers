@@ -42,8 +42,7 @@ export default function HeroSection() {
   const { prefix, highlight } = phrases[index];
 
   return (
-    <section className="relative pt-44 pb-20 px-6 flex flex-col items-center text-center overflow-hidden">
-      {/* Soft yellow radial glow */}
+    <section className="relative pt-35 pb-20 px-6 flex flex-col items-center text-center overflow-hidden">
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
         style={{
@@ -55,27 +54,24 @@ export default function HeroSection() {
       />
 
       <div className="max-w-4xl w-full relative z-10">
-        {/* Eyebrow badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="inline-flex items-center gap-2 bg-surface-container-low border border-outline-variant/20 rounded-full px-4 py-1.5 mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-primary-container animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
           <span className="text-xs font-semibold text-zinc-400 tracking-widest uppercase">
             Available for new Projects
           </span>
         </motion.div>
 
-        {/* Animated headline */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-8 min-h-[1.9em] flex flex-col items-center justify-center gap-1">
-            {/* Static white prefix — slides out/in */}
             <AnimatePresence mode="wait">
               <motion.span
                 key={`prefix-${index}`}
@@ -89,7 +85,6 @@ export default function HeroSection() {
               </motion.span>
             </AnimatePresence>
 
-            {/* Yellow highlight — slightly delayed for stagger */}
             <AnimatePresence mode="wait">
               <motion.span
                 key={`highlight-${index}`}
@@ -109,7 +104,6 @@ export default function HeroSection() {
           </h1>
         </motion.div>
 
-        {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -120,7 +114,6 @@ export default function HeroSection() {
           AI era.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -144,7 +137,6 @@ export default function HeroSection() {
           </a>
         </motion.div>
 
-        {/* Progress dots */}
         <div className="flex items-center justify-center gap-2 mb-12">
           {phrases.map((_, i) => (
             <button
@@ -167,7 +159,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Infinite project carousel */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -186,3 +177,4 @@ export default function HeroSection() {
     </section>
   );
 }
+  

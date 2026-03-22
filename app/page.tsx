@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import MarqueeBanner from "@/components/MarqueeBanner";
 import ServicesSection from "@/components/ServicesSection";
 import WorkSection from "@/components/WorkSection";
 import WhyUsSection from "@/components/WhyUsSection";
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <MarqueeBanner />
         <ServicesSection />
         <WorkSection />
         <WhyUsSection />

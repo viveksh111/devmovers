@@ -103,3 +103,19 @@ h4 {
   --animate-infinite-scroll: infinite-scroll 32s linear infinite;
 }
 
+/* ── Diagonal marquee ticker ── */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-25%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-25%); }
+  to   { transform: translateX(0); }
+}
+
+@theme inline {
+  --animate-marquee-left:  marquee-left  28s linear infinite;
+  --animate-marquee-right: marquee-right 28s linear infinite;
+}
+

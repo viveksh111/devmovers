@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "next/link"; 
 import Logo from "./Logo";
 import { motion } from "motion/react";
 
