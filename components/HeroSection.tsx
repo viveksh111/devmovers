@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import InfiniteCarousel from "./InfiniteCarousel";
 
@@ -120,12 +121,12 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
-          <a
-            href="#faq"
+          <Link
+            href="/contact"
             className="inline-block bg-primary-container text-on-primary-container px-10 py-4 rounded-full font-bold text-base hover:scale-105 active:scale-95 transition-transform"
           >
             Contact Us
-          </a>
+          </Link>
           <a
             href="#work"
             className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-semibold"

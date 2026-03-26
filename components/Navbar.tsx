@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "motion/react";
 import Logo from "./Logo";
 
@@ -71,37 +72,46 @@ export default function Navbar() {
         style={{ border: "1px solid rgba(255,226,36,0.06)" }}
       >
         {/* Logo */}
-        <a href="/" aria-label="DevMovers home">
+        <Link href="/" aria-label="DevMovers home">
           <motion.div
             animate={{ scale: scrolled ? 0.88 : 1 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <Logo size={scrolled ? 30 : 34} variant="dark" showWordmark />
           </motion.div>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-7 text-sm font-semibold font-(family-name:--font-plus-jakarta-sans) tracking-tight">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNav(e, link.href)}
+                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
 
         {/* Desktop CTA */}
-        <a
-          href="#faq"
-          onClick={(e) => handleNav(e, "#faq")}
+        <Link
+          href="/contact"
           className="hidden md:inline-block bg-primary-container text-on-primary-container font-bold text-sm px-5 py-2 rounded-full hover:scale-105 active:scale-90 transition-transform"
         >
           Get Started
-        </a>
+        </Link>
 
         {/* Mobile hamburger */}
         <button
@@ -124,23 +134,34 @@ export default function Navbar() {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.25 }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300 font-semibold"
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#faq"
-            onClick={(e) => handleNav(e, "#faq")}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300 font-semibold"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNav(e, link.href)}
+                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300 font-semibold"
+              >
+                {link.label}
+              </a>
+            )
+          )}
+          <Link
+            href="/contact"
+            onClick={() => setMobileOpen(false)}
             className="mt-2 bg-primary-container text-on-primary-container font-bold text-sm px-6 py-3 rounded-full text-center"
           >
             Get Started
-          </a>
+          </Link>
         </motion.div>
       )}
     </motion.nav>

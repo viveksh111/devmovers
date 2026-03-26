@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FadeIn, ScaleIn } from "./AnimationWrappers";
 
 export default function CtaSection() {
@@ -18,9 +19,9 @@ export default function CtaSection() {
             </FadeIn>
           </div>
           <FadeIn direction="left" delay={0.3}>
-            <button className="bg-zinc-950 text-white px-12 py-6 text-xl font-bold hover:bg-zinc-800 active:scale-95 transition-all whitespace-nowrap">
+            <Link href="/contact" className="inline-block bg-zinc-950 text-white px-12 py-6 text-xl font-bold hover:bg-zinc-800 active:scale-95 transition-all whitespace-nowrap">
               Schedule a consultation
-            </button>
+            </Link>
           </FadeIn>
         </div>
       </ScaleIn>
