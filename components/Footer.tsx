@@ -138,7 +138,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <span className="text-zinc-500">
-            © 2025 DevMovers. All rights reserved.
+            © 2026 DevMovers. All rights reserved.
           </span>
           <LiveClock />
           <button
