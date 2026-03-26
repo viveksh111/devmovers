@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import Logo from "./Logo";
 
@@ -15,6 +16,8 @@ function smoothScrollTo(hash: string) {
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -25,24 +28,31 @@ export default function Navbar() {
   const navLinks = [
     { href: "#services", label: "Services" },
     { href: "#work", label: "Work" },
-    { href: "#process", label: "Process" },
     { href: "#why-us", label: "Why Us" },
-    { href: "#blog", label: "Blog" },
     { href: "#faq", label: "FAQ" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Full-page route — let Next.js handle it
+    if (href.startsWith("/")) return;
     e.preventDefault();
     setMobileOpen(false);
-    smoothScrollTo(href);
+    if (pathname !== "/") {
+      // Navigate home first; browser will scroll to hash on arrival
+      router.push("/" + href);
+    } else {
+      smoothScrollTo(href);
+    }
   };
 
   return (
     <motion.nav
       className="fixed top-6 left-1/2 z-50"
       style={{ translateX: "-50%" }}
+      initial={{ width: "55%", top: 24 }}
       animate={{
-        width: scrolled ? "75%" : "90%",
+        width: scrolled ? "50%" : "55%",
         top: scrolled ? 12 : 24,
       }}
       transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
