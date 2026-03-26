@@ -4,6 +4,14 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import Logo from "./Logo";
 
+function smoothScrollTo(hash: string) {
+  const id = hash.replace("#", "");
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -23,12 +31,17 @@ export default function Navbar() {
     { href: "#faq", label: "FAQ" },
   ];
 
+  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    smoothScrollTo(href);
+  };
+
   return (
     <motion.nav
       className="fixed top-6 left-1/2 z-50"
       style={{ translateX: "-50%" }}
       animate={{
-        // Shrink width and add stronger blur when scrolled
         width: scrolled ? "75%" : "90%",
         top: scrolled ? 12 : 24,
       }}
@@ -63,6 +76,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNav(e, link.href)}
               className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300"
             >
               {link.label}
@@ -73,6 +87,7 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <a
           href="#faq"
+          onClick={(e) => handleNav(e, "#faq")}
           className="hidden md:inline-block bg-primary-container text-on-primary-container font-bold text-sm px-5 py-2 rounded-full hover:scale-105 active:scale-90 transition-transform"
         >
           Get Started
@@ -103,16 +118,16 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => handleNav(e, link.href)}
               className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300 font-semibold"
-              onClick={() => setMobileOpen(false)}
             >
               {link.label}
             </a>
           ))}
           <a
             href="#faq"
+            onClick={(e) => handleNav(e, "#faq")}
             className="mt-2 bg-primary-container text-on-primary-container font-bold text-sm px-6 py-3 rounded-full text-center"
-            onClick={() => setMobileOpen(false)}
           >
             Get Started
           </a>

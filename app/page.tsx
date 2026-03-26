@@ -4,6 +4,7 @@ import MarqueeBanner from "@/components/MarqueeBanner";
 import ServicesSection from "@/components/ServicesSection";
 import WorkSection from "@/components/WorkSection";
 import WhyUsSection from "@/components/WhyUsSection";
+import ComparisonSection from "@/components/ComparisonSection";
 import PricingSection from "@/components/PricingSection";
 import BlogSection from "@/components/BlogSection";
 import FaqSection from "@/components/FaqSection";
@@ -20,6 +21,7 @@ export default function Home() {
         <ServicesSection />
         <WorkSection />
         <WhyUsSection />
+        <ComparisonSection />
         <PricingSection />
         <BlogSection />
         <FaqSection />
