@@ -4,25 +4,25 @@ import { useRef, useEffect } from "react";
 import { motion, useMotionValue, useAnimationFrame } from "motion/react";
 
 const rowOne = [
-  "AI-Driven Engineering",
-  "Ship in 21 Days",
-  "Startup First",
-  "Founder-Led",
-  "Scalable From Day One",
-  "Full-Stack AI",
-  "Fixed Fee",
-  "Zero Bloat",
+  "Web App Development",
+  "Mobile Apps",
+  "Secure Coding",
+  "Startup MVP",
+  "Backend & APIs",
+  "Full-Stack Team",
+  "Security Testing",
+  "Built to Scale",
 ];
 
 const rowTwo = [
-  "Product Launch",
-  "Fast, Lean, Scalable",
-  "MVP in 30 Days",
-  "Cloud Architecture",
-  "LLM Integration",
-  "24/7 Support",
-  "Zero Technical Debt",
-  "Built to Scale",
+  "DevOps & Cloud",
+  "Fast Delivery",
+  "Android & iOS",
+  "Data Analytics",
+  "CI/CD Pipelines",
+  "Transparent Pricing",
+  "Security-First",
+  "Scalable Systems",
 ];
 
 const EDGE_MASK =

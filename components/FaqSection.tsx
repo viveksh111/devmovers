@@ -11,34 +11,34 @@ type FaqItem = {
 
 const faqs: FaqItem[] = [
   {
-    id: "deployment",
-    question: "How do you achieve 21-day deployment?",
+    id: "services",
+    question: "What services does DevMovers offer?",
     answer:
-      "We use AI-augmented development pipelines combined with pre-built infrastructure templates and a dedicated sprint methodology. Our team works in parallel streams — design, backend, and frontend — eliminating handoff delays that slow traditional agencies.",
+      "DevMovers offers a full suite of digital development services including web application development, mobile app development (Android & iOS), backend & API development, DevOps & cloud deployment, security testing & secure coding, and data analytics & insights.",
   },
   {
-    id: "tech-stack",
-    question: "Do you work with existing tech stacks?",
+    id: "timeline",
+    question: "How quickly can you deliver my project?",
     answer:
-      "Absolutely. We perform a thorough architecture audit of your existing stack before engaging. Our engineers are polyglot and can extend, refactor, or integrate with virtually any modern technology while minimising disruption.",
+      "We deliver MVPs fast — typically from concept to a functional product in weeks, not months. Our streamlined process, dedicated team structure, and parallel workstreams eliminate the delays that slow most agencies down.",
   },
   {
-    id: "ai-models",
-    question: "What AI models do you typically use?",
+    id: "security",
+    question: "How do you ensure application security?",
     answer:
-      "We're model-agnostic. Depending on your use case, latency requirements, and cost targets, we evaluate options from OpenAI, Anthropic, Google DeepMind, open-source models like Llama, and specialized domain models. We recommend the best fit, not the most hyped.",
+      "Security is built into every stage of our development process, not bolted on afterward. We follow secure coding practices, conduct vulnerability assessments, and perform security testing before every deployment to protect your application and your users.",
   },
   {
-    id: "maintenance",
-    question: "Is the maintenance included in the fixed fee?",
+    id: "startups",
+    question: "Do you work with early-stage startups?",
     answer:
-      "The Product Launch tier includes 30 days of post-launch support. The Full Partnership retainer covers ongoing maintenance, monitoring, and continuous improvement as part of the monthly engagement.",
+      "Absolutely. We specialize in startup-focused solutions and understand the unique challenges founders face. We build cost-effective, scalable products that let you launch fast, validate your idea, and grow without needing to rebuild later.",
   },
   {
-    id: "how-fast",
-    question: "How fast can you deliver my project?",
+    id: "communication",
+    question: "How do you handle project communication?",
     answer:
-      "Most MVPs are delivered in 21 days. More complex platforms with custom AI pipelines typically land between 30–45 days. We always agree on a clear delivery milestone before starting.",
+      "We believe in full transparency. You get regular progress updates, clear milestone reporting, and direct access to your project lead. No black boxes — you always know what's being built and when it will be ready.",
   },
 ];
 
@@ -177,7 +177,9 @@ export default function FaqSection() {
           {faqs.map((faq, i) => (
             <motion.div
               key={faq.id}
-              ref={(el) => { itemRefs.current[faq.id] = el; }}
+              ref={(el) => {
+                itemRefs.current[faq.id] = el;
+              }}
               className="bg-surface-container-low overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

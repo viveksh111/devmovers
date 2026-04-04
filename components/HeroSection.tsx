@@ -7,24 +7,24 @@ import InfiniteCarousel from "./InfiniteCarousel";
 
 const phrases = [
   {
-    prefix: "We Design & Build Products with",
-    highlight: "AI-Driven Velocity",
+    prefix: "Secure, Scalable &",
+    highlight: "High Performance",
   },
   {
-    prefix: "Ship Your Next MVP in",
-    highlight: "30 Days, Not Months",
+    prefix: "Ship Your MVP",
+    highlight: "In Weeks, Not Months",
   },
   {
-    prefix: "From Concept to Production",
-    highlight: "in Just 21 Days",
+    prefix: "From Concept",
+    highlight: "To Production",
   },
   {
-    prefix: "Scalable Systems Built",
-    highlight: "From Day One",
+    prefix: "Full-Stack",
+    highlight: "Web & Mobile Apps",
   },
   {
-    prefix: "AI & Cloud Engineering",
-    highlight: "at Startup Speed",
+    prefix: "Security-First",
+    highlight: "At Startup Speed",
   },
 ];
 
@@ -72,36 +72,36 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-8 min-h-[1.9em] flex flex-col items-center justify-center gap-1">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={`prefix-${index}`}
-                className="block text-white"
-                initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -24, filter: "blur(4px)" }}
-                transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                {prefix}
-              </motion.span>
-            </AnimatePresence>
-
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={`highlight-${index}`}
-                style={{ color: "#FFE224" }}
-                initial={{ opacity: 0, y: 36, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -28, filter: "blur(4px)" }}
-                transition={{
-                  duration: 0.45,
-                  delay: 0.06,
-                  ease: [0.25, 0.1, 0.25, 1],
-                }}
-              >
-                {highlight}
-              </motion.span>
-            </AnimatePresence>
+          <h1
+            className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter w-full mb-8"
+            style={{ lineHeight: 1.1 }}
+          >
+            {/* Single fixed-height container — both lines animate together, no layout shift */}
+            <div
+              className="relative overflow-hidden w-full"
+              style={{ height: "2.3em" }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={index}
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-0"
+                  initial={{ opacity: 0, y: "40%", filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: "0%", filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: "-40%", filter: "blur(4px)" }}
+                  transition={{ duration: 0.48, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  <span className="block text-white text-center leading-tight">
+                    {prefix}
+                  </span>
+                  <span
+                    className="block text-center leading-tight"
+                    style={{ color: "#FFE224" }}
+                  >
+                    {highlight}
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </h1>
         </motion.div>
 
@@ -109,10 +109,19 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 font-medium"
+          className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-4 font-medium"
         >
-          High-performance engineering and architectural software design for the
-          AI era.
+          We help startups and businesses turn ideas into powerful web and mobile
+          applications with modern technology, strong security, and fast delivery.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.32, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-base text-zinc-500 max-w-xl mx-auto mb-10"
+        >
+          From MVP development to full-scale solutions, our expert team ensures your product is
+          reliable, user-friendly, and built for growth.
         </motion.p>
 
         <motion.div
@@ -125,17 +134,17 @@ export default function HeroSection() {
             href="/contact"
             className="inline-block bg-primary-container text-on-primary-container px-10 py-4 rounded-full font-bold text-base hover:scale-105 active:scale-95 transition-transform"
           >
-            Contact Us
+            Get Free Consultation
           </Link>
-          <a
-            href="#work"
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-semibold"
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 border border-outline-variant/30 text-zinc-300 hover:text-white hover:border-white/50 transition-all px-8 py-4 rounded-full font-semibold text-sm"
           >
-            View our work
+            Start Your Project
             <span className="material-symbols-outlined text-sm">
               arrow_forward
             </span>
-          </a>
+          </Link>
         </motion.div>
 
         <div className="flex items-center justify-center gap-2 mb-12">

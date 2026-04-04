@@ -17,18 +17,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DevMovers | AI-Driven Product Engineering",
+  title: "DevMovers | Secure, Scalable & High-Performance Web Development",
   description:
-    "High-performance engineering and architectural software design for the AI era. We design & build products with AI-driven velocity — from MVP to production in 21 days.",
+    "DevMovers helps startups and businesses build secure, scalable web and mobile applications. Full-stack development, DevOps, security testing, and startup MVP development. Get a free consultation today.",
   keywords: [
-    "AI engineering",
-    "product engineering",
-    "software architecture",
-    "AI integration",
-    "startup MVP",
+    "web development company",
+    "full stack development services",
+    "secure web application development",
+    "startup MVP development",
+    "freelance development team",
+    "DevOps services",
+    "API development",
+    "mobile app development",
+    "custom web applications",
+    "scalable web apps",
     "DevMovers",
-    "cloud infrastructure",
-    "LLM agents",
+    "backend development",
+    "cloud deployment",
+    "security testing",
   ],
   authors: [{ name: "DevMovers" }],
   creator: "DevMovers",
@@ -48,15 +54,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://devmovers.com",
     siteName: "DevMovers",
-    title: "DevMovers | AI-Driven Product Engineering",
+    title: "DevMovers | Secure, Scalable & High-Performance Web Development",
     description:
-      "High-performance engineering and architectural software design for the AI era.",
+      "Build secure, scalable web and mobile applications with DevMovers. Full-stack development, DevOps, security testing, and startup MVP development.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevMovers | AI-Driven Product Engineering",
+    title: "DevMovers | Secure, Scalable & High-Performance Web Development",
     description:
-      "High-performance engineering and architectural software design for the AI era.",
+      "Build secure, scalable web and mobile applications with DevMovers. Full-stack development, DevOps, and startup MVP development.",
     creator: "@devmovers",
   },
 };

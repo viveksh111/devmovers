@@ -6,16 +6,19 @@ import Logo from "./Logo";
 import { motion } from "motion/react";
 
 const navLinks = [
-  { href: "#", label: "About" },
-  { href: "#work", label: "Works" },
   { href: "#services", label: "Services" },
-  { href: "#blog", label: "Blog" },
+  { href: "#about", label: "About" },
+  { href: "#work", label: "Work" },
+  { href: "#process", label: "Process" },
+  { href: "#testimonials", label: "Clients" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 const socialLinks = [
-  { href: "#", label: "Twitter(X)" },
+  { href: "#", label: "Twitter (X)" },
   { href: "#", label: "LinkedIn" },
   { href: "#", label: "Instagram" },
+  { href: "#", label: "GitHub" },
 ];
 
 const legalLinks = [
@@ -69,9 +72,13 @@ export default function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-12 lg:px-20">
         {/* Top: Logo + columns */}
         <div className="pt-20 pb-16 grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Logo */}
+          {/* Logo + tagline */}
           <div className="md:col-span-1">
             <Logo size={40} variant="dark" showWordmark />
+            <p className="text-zinc-600 text-sm mt-4 leading-relaxed">
+              Building secure, scalable &amp; high-performance digital products
+              for startups and enterprises.
+            </p>
           </div>
 
           {/* Navigation */}
@@ -82,21 +89,60 @@ export default function Footer() {
             <ul className="space-y-4">
               {navLinks.map((l) => (
                 <li key={l.label}>
-                  <Link
+                  <a
                     href={l.href}
                     className="text-lg font-bold text-white hover:text-primary-container transition-colors duration-200"
                   >
                     {l.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-6">
+              Contact
+            </p>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="mailto:info@devmovers.com"
+                  className="text-base font-medium text-white hover:text-primary-container transition-colors duration-200 flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-primary-container text-base">mail</span>
+                  info@devmovers.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base font-medium text-white hover:text-primary-container transition-colors duration-200 flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-primary-container text-base">phone</span>
+                  WhatsApp Us
+                </a>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1 text-sm font-bold mt-2 hover:text-primary-container transition-colors"
+                  style={{ color: "#FFE224" }}
+                >
+                  Get Free Consultation
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
           {/* Social */}
           <div>
             <p className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-6">
-              Social
+              Follow Us
             </p>
             <ul className="space-y-4">
               {socialLinks.map((l) => (
@@ -110,25 +156,18 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Legals */}
-          <div>
-            <p className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-6">
-              Legals
-            </p>
-            <ul className="space-y-4">
-              {legalLinks.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="text-lg font-bold text-white hover:text-primary-container transition-colors duration-200"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-6 pt-6 border-t border-white/5">
+              <p className="text-xs text-zinc-600 uppercase tracking-widest font-semibold mb-1">Legal</p>
+              <div className="space-y-2 mt-3">
+                {legalLinks.map((l) => (
+                  <div key={l.label}>
+                    <Link href={l.href} className="text-sm text-zinc-600 hover:text-zinc-400 transition-colors">
+                      {l.label}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 

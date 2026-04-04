@@ -80,7 +80,14 @@ body {
   background-color: #131313;
   color: #e5e2e1;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
+
+/* Always show scrollbar track to prevent layout shift */
+html {
+  overflow-y: scroll;
+}
+
 
 h1,
 h2,

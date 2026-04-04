@@ -309,9 +309,12 @@ export default function ContactPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <h1 className="text-7xl md:text-9xl font-black tracking-tighter leading-none">
-                Let's<br />
-                <span style={{ color: "#FFE224" }}>Talk</span>
+              <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none">
+                Let&apos;s Build
+                <br />
+                <span style={{ color: "#FFE224" }}>Something</span>
+                <br />
+                Great
               </h1>
             </motion.div>
 
@@ -322,9 +325,27 @@ export default function ContactPage() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <p className="text-zinc-400 text-lg leading-relaxed">
-                Got a product idea, a team to scale, or a codebase that needs rescuing?
-                We're ready. Pick the option that suits you best.
+                Have an idea or project in mind? We&apos;d love to hear from you.
+                Reach out and let&apos;s turn your vision into reality.
               </p>
+              <div className="space-y-3">
+                <a
+                  href="mailto:info@devmovers.com"
+                  className="flex items-center gap-3 text-zinc-400 hover:text-yellow-400 transition-colors group"
+                >
+                  <span className="material-symbols-outlined text-primary-container group-hover:scale-110 transition-transform">mail</span>
+                  <span className="text-sm font-medium">info@devmovers.com</span>
+                </a>
+                <a
+                  href="https://wa.me/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-zinc-400 hover:text-yellow-400 transition-colors group"
+                >
+                  <span className="material-symbols-outlined text-primary-container group-hover:scale-110 transition-transform">phone</span>
+                  <span className="text-sm font-medium">WhatsApp / Phone</span>
+                </a>
+              </div>
               <div className="flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
                 <span className="text-sm text-zinc-500">Usually respond within 2 hours</span>
@@ -346,17 +367,17 @@ export default function ContactPage() {
                 <p className="text-xs font-bold tracking-widest text-zinc-600 uppercase mb-3">
                   Option 1
                 </p>
-                <h2 className="text-2xl font-black text-white mb-2">Book a Discovery Call</h2>
+                <h2 className="text-2xl font-black text-white mb-2">Get a Free Consultation</h2>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  Jump on a 30-min strategy session. We'll map out what you need and give you a clear delivery plan — no fluff.
+                  Jump on a free 30-min strategy session. We&apos;ll understand your goals and give you a clear delivery plan — no commitment needed.
                 </p>
               </div>
 
               <div className="flex flex-col gap-4">
                 {[
-                  { icon: "⚡", text: "21-day MVP delivery" },
-                  { icon: "🤖", text: "AI-native engineering team" },
-                  { icon: "🔒", text: "Fixed fee, zero surprises" },
+                  { icon: "⚡", text: "Fast & reliable delivery" },
+                  { icon: "🔐", text: "Security-first approach" },
+                  { icon: "🤝", text: "Transparent communication" },
                 ].map((item) => (
                   <div key={item.text} className="flex items-center gap-3">
                     <span className="text-lg">{item.icon}</span>
@@ -389,7 +410,7 @@ export default function ContactPage() {
               <p className="text-xs font-bold tracking-widest text-zinc-600 uppercase mb-3">
                 Option 2
               </p>
-              <h2 className="text-2xl font-black text-white mb-6">Send a Project Brief</h2>
+              <h2 className="text-2xl font-black text-white mb-6">Submit Your Project Inquiry</h2>
 
               <AnimatePresence mode="wait">
                 {status === "sent" ? (
@@ -421,11 +442,11 @@ export default function ContactPage() {
                     initial="hidden"
                     animate="show"
                   >
-                    <InputField label="Name" id="name" placeholder="Your full name" value={form.name} onChange={set("name")} required index={0} />
+                    <InputField label="Your Name" id="name" placeholder="Full name" value={form.name} onChange={set("name")} required index={0} />
                     <InputField label="Email Address" id="email" type="email" placeholder="you@company.com" value={form.email} onChange={set("email")} required index={1} />
-                    <InputField label="Alternative Contact" id="alt" placeholder="@username (WhatsApp / LinkedIn / Discord)" value={form.alt} onChange={set("alt")} index={2} hint="optional" />
-                    <SelectField label="Budget (USD)" id="budget" value={form.budget} onChange={set("budget")} options={budgetOptions} index={3} />
-                    <TextAreaField label="Project Description" id="description" placeholder="Tell us about your idea, timeline, and any technical constraints…" value={form.description} onChange={set("description")} index={4} />
+                    <InputField label="Phone / WhatsApp" id="alt" placeholder="+91 XXXXXXXXXX or WhatsApp number" value={form.alt} onChange={set("alt")} index={2} hint="optional" />
+                    <SelectField label="Budget (Optional)" id="budget" value={form.budget} onChange={set("budget")} options={budgetOptions} index={3} />
+                    <TextAreaField label="Project Details" id="description" placeholder="Tell us about your project — what you want to build, your timeline, and any technical requirements…" value={form.description} onChange={set("description")} index={4} />
 
                     <motion.div
                       variants={fadeUp}
@@ -444,7 +465,7 @@ export default function ContactPage() {
                         {status === "sending" ? (
                           <>Sending… <span className="animate-spin">⚙</span></>
                         ) : (
-                          <>Send project request ⚡</>
+                          <>Submit Inquiry ⚡</>
                         )}
                       </motion.button>
                     </motion.div>

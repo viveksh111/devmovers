@@ -9,18 +9,21 @@ export default function CtaSection() {
           <div className="max-w-xl">
             <FadeIn direction="up" delay={0.1}>
               <h2 className="text-4xl md:text-6xl font-black text-on-primary-container leading-tight mb-6">
-                Ready to move faster?
+                Ready to Build Your Next Project?
               </h2>
             </FadeIn>
             <FadeIn direction="up" delay={0.2}>
               <p className="text-on-primary-container/80 text-xl font-medium">
-                Let&apos;s discuss your roadmap and architectural needs today.
+                Partner with DevMovers and turn your ideas into reality.
               </p>
             </FadeIn>
           </div>
           <FadeIn direction="left" delay={0.3}>
-            <Link href="/contact" className="inline-block bg-zinc-950 text-white px-12 py-6 text-xl font-bold hover:bg-zinc-800 active:scale-95 transition-all whitespace-nowrap">
-              Schedule a consultation
+            <Link
+              href="/contact"
+              className="inline-block bg-zinc-950 text-white px-12 py-6 text-xl font-bold hover:bg-zinc-800 active:scale-95 transition-all whitespace-nowrap"
+            >
+              Contact Us Today
             </Link>
           </FadeIn>
         </div>

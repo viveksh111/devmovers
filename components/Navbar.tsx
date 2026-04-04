@@ -28,9 +28,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "#services", label: "Services" },
+    { href: "#about", label: "About" },
     { href: "#work", label: "Work" },
-    { href: "#why-us", label: "Why Us" },
-    { href: "#faq", label: "FAQ" },
+    { href: "#process", label: "Process" },
+    { href: "#testimonials", label: "Clients" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -51,9 +52,9 @@ export default function Navbar() {
     <motion.nav
       className="fixed top-6 left-1/2 z-50"
       style={{ translateX: "-50%" }}
-      initial={{ width: "55%", top: 24 }}
+      initial={{ width: "min(800px, 95vw)", top: 24 }}
       animate={{
-        width: scrolled ? "50%" : "55%",
+        width: scrolled ? "min(740px, 93vw)" : "min(800px, 95vw)",
         top: scrolled ? 12 : 24,
       }}
       transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -82,7 +83,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-7 text-sm font-semibold font-(family-name:--font-plus-jakarta-sans) tracking-tight">
+        <div className="hidden md:flex items-center gap-5 text-xs font-semibold font-(family-name:--font-plus-jakarta-sans) tracking-tight">
           {navLinks.map((link) =>
             link.href.startsWith("/") ? (
               <Link
@@ -108,9 +109,9 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <Link
           href="/contact"
-          className="hidden md:inline-block bg-primary-container text-on-primary-container font-bold text-sm px-5 py-2 rounded-full hover:scale-105 active:scale-90 transition-transform"
+          className="hidden md:inline-block bg-primary-container text-on-primary-container font-bold text-xs px-4 py-2 rounded-full hover:scale-105 active:scale-90 transition-transform whitespace-nowrap shrink-0"
         >
-          Get Started
+          Get Free Consultation
         </Link>
 
         {/* Mobile hamburger */}
@@ -160,7 +161,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="mt-2 bg-primary-container text-on-primary-container font-bold text-sm px-6 py-3 rounded-full text-center"
           >
-            Get Started
+            Get Free Consultation
           </Link>
         </motion.div>
       )}
