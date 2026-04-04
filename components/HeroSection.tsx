@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import InfiniteCarousel from "./InfiniteCarousel";
 
-const phrases = [
+const phrases = [ 
   {
     prefix: "Secure, Scalable &",
     highlight: "High Performance",
