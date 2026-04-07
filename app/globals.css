@@ -75,6 +75,26 @@
   scrollbar-width: none;
 }
 
+/* Dark-themed scrollbar for comparison table */
+.scrollbar-dark {
+  scrollbar-width: thin;
+  scrollbar-color: #FFE224 #1c1b1b;
+}
+.scrollbar-dark::-webkit-scrollbar {
+  height: 6px;
+}
+.scrollbar-dark::-webkit-scrollbar-track {
+  background: #1c1b1b;
+  border-radius: 9999px;
+}
+.scrollbar-dark::-webkit-scrollbar-thumb {
+  background: #FFE224;
+  border-radius: 9999px;
+}
+.scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  background: #e6cc00;
+}
+
 body {
   font-family: var(--font-body);
   background-color: #131313;

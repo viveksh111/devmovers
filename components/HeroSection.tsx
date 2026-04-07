@@ -78,8 +78,7 @@ export default function HeroSection() {
           >
             {/* Single fixed-height container — both lines animate together, no layout shift */}
             <div
-              className="relative overflow-hidden w-full"
-              style={{ height: "2.3em" }}
+              className="relative overflow-hidden w-full h-[3.8em] md:h-[2.8em] lg:h-[2.4em]"
             >
               <AnimatePresence mode="wait">
                 <motion.div

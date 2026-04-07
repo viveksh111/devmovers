@@ -111,8 +111,8 @@ export default function ComparisonSection() {
           </p>
         </motion.div>
 
-        <div className="w-full overflow-hidden rounded-2xl border border-zinc-800/50">
-          <table className="w-full border-collapse table-fixed">
+        <div className="w-full overflow-x-auto rounded-2xl border border-zinc-800/50 scrollbar-dark">
+          <table className="w-full min-w-[600px] border-collapse table-fixed">
             <thead>
               <tr className="border-b border-zinc-800">
                 <th className="py-5 px-6 text-left text-sm font-semibold text-zinc-500 w-[30%]">

@@ -18,7 +18,6 @@ const socialLinks = [
   { href: "#", label: "Twitter (X)" },
   { href: "#", label: "LinkedIn" },
   { href: "#", label: "Instagram" },
-  { href: "#", label: "GitHub" },
 ];
 
 const legalLinks = [
@@ -58,14 +57,14 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-zinc-950 text-white">
-      {/* Yellow glow radiating from bottom center — large & vivid */}
+      {/* Yellow glow radiating from top center */}
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
         style={{
           width: "140%",
-          height: "680px",
+          height: "600px",
           background:
-            "radial-gradient(ellipse at center bottom, rgba(255,226,36,0.38) 0%, rgba(255,226,36,0.18) 35%, rgba(255,226,36,0.05) 60%, transparent 80%)",
+            "radial-gradient(ellipse at center top, rgba(255,226,36,0.32) 0%, rgba(255,226,36,0.14) 35%, rgba(255,226,36,0.04) 60%, transparent 80%)",
         }}
       />
 

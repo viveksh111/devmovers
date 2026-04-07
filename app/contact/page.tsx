@@ -24,6 +24,7 @@ type FormState = {
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: (i: number) => ({
@@ -254,10 +255,27 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    // Simulate async send (replace with real API call)
-    await new Promise((r) => setTimeout(r, 1600));
-    setStatus("sent");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error ?? "Something went wrong.");
+      }
+      setStatus("sent");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
   };
+
+  const errorMessage =
+    status === "error"
+      ? "Something went wrong. Please email us directly at info@devmovers.com"
+      : null;
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white relative overflow-hidden">
@@ -447,6 +465,23 @@ export default function ContactPage() {
                     <InputField label="Phone / WhatsApp" id="alt" placeholder="+91 XXXXXXXXXX or WhatsApp number" value={form.alt} onChange={set("alt")} index={2} hint="optional" />
                     <SelectField label="Budget (Optional)" id="budget" value={form.budget} onChange={set("budget")} options={budgetOptions} index={3} />
                     <TextAreaField label="Project Details" id="description" placeholder="Tell us about your project — what you want to build, your timeline, and any technical requirements…" value={form.description} onChange={set("description")} index={4} />
+
+                    {errorMessage && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-lg px-4 py-3"
+                      >
+                        ⚠ {errorMessage}{" "}
+                        <button
+                          type="button"
+                          onClick={() => setStatus("idle")}
+                          className="underline hover:text-red-300 transition-colors"
+                        >
+                          Try again
+                        </button>
+                      </motion.p>
+                    )}
 
                     <motion.div
                       variants={fadeUp}

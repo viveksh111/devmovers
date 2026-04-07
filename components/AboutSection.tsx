@@ -5,7 +5,6 @@ export default function AboutSection() {
     <section id="about" className="py-32 px-6 lg:px-20 bg-surface">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          {/* Left: Main content */}
           <div>
             <FadeIn direction="left">
               <span className="text-primary-container text-sm font-bold tracking-[0.2em] uppercase mb-4 block">
@@ -35,7 +34,6 @@ export default function AboutSection() {
             </FadeIn>
           </div>
 
-          {/* Right: Mission & Vision */}
           <div>
             <StaggerChildren className="space-y-0" staggerDelay={0.15}>
               <StaggerItem>
@@ -76,13 +74,12 @@ export default function AboutSection() {
                 </div>
               </StaggerItem>
 
-              {/* Stats row */}
               <StaggerItem>
                 <div className="grid grid-cols-3 gap-0 mt-0">
                   {[
                     { value: "30+", label: "Projects Delivered" },
                     { value: "98%", label: "Client Satisfaction" },
-                    { value: "5+", label: "Years Experience" },
+                    { value: "2+", label: "Years Experience" },
                   ].map((stat) => (
                     <div
                       key={stat.label}
