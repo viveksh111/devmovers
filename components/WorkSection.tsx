@@ -1,133 +1,182 @@
+"use client";
+
+import { motion } from "motion/react";
 import Image from "next/image";
-import { FadeIn, StaggerChildren, StaggerItem } from "./AnimationWrappers";
 
-type Project = {
-  number: string;
-  title: string;
-  description: string;
-  features: string[];
-  imageSrc: string;
-  imageAlt: string;
-};
-
-const projects: Project[] = [
+const projects = [
   {
-    number: "01",
-    title: "E-Commerce Platform",
+    id: "01",
+    category: "E-Commerce",
+    title: "High-Traffic Online Store",
     description:
-      "A fully-featured e-commerce solution built for high-traffic sales and seamless admin operations.",
-    features: [
-      "Secure payment gateway integration",
-      "Admin dashboard with analytics",
-      "Fast and responsive UI",
-    ],
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCA9K85-0irjfUZkLyI-JOxOUfPY0tUTr96ANmTmm4mj6AhoLVNCF7GnQ0eAwUPPeQWBTGxJY0wCWisKvkPqN-YoFx4hSOQtNbQv_XZIt-95NTWYaiw2MwTdrAbpJxxo1Lxr0R24-6qUVueNTR9CJkxo1a-hiYhQBYJGyAWEdk5_uQVcBmanPnWtdiH8BcJru8RdvsBeP20vAJ3PBdYF7_uUgoOm2P5K5kajAaP_zwiaOjDyaBXbhmjM18CV-uXXLzd2XaXl9ahMln7",
-    imageAlt: "E-commerce platform with product listings and clean dashboard",
+      "Full-stack e-commerce platform built for scale — Stripe payments, real-time inventory, and a blazing-fast storefront.",
+    tags: ["Next.js", "Stripe", "PostgreSQL", "Redis"],
+    img: "/proj-ecommerce.png",
+    span: "col-span-1 md:col-span-2",   // wide card
+    aspect: "aspect-[16/9]",
   },
   {
-    number: "02",
-    title: "SaaS Dashboard",
+    id: "02",
+    category: "SaaS",
+    title: "Analytics Dashboard",
     description:
-      "A scalable SaaS platform with real-time analytics, user management, and enterprise-grade architecture.",
-    features: [
-      "User authentication system",
-      "Real-time analytics & reporting",
-      "Scalable backend architecture",
-    ],
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAqN7XSamHDGrXu9-HjtYgrEJ3cM_icHaf0Syr_IFesDEIYCR9k2J-XOoEOYG4Z5Sym_c_BH5QW8RPYZ7xamIuLbc4-ofcySD03BT29BX08SWGKyc34tlvc8FmivYBntCgJ9gugJ05jmZwCqWqhy5x0fcJWOHxHWFLzNmuLqyLktQhezU0_0wK68CMSXJ-PLlM2OcukFSPuz5iwC3yYbxFiER-OHxuJ84gctWOLV-YMYmQNXAd5jvvMNi6GcVbNtE9dg446mllsAQyc",
-    imageAlt: "SaaS analytics dashboard with charts and data visualizations",
+      "Enterprise SaaS platform with real-time charts, user management, role-based access and advanced reporting.",
+    tags: ["React", "Node.js", "WebSockets", "AWS"],
+    img: "/proj-saas.png",
+    span: "col-span-1",                 // tall card
+    aspect: "aspect-[4/5]",
   },
   {
-    number: "03",
-    title: "Secure Authentication System",
+    id: "03",
+    category: "Web App",
+    title: "MVP — Shipped in 3 Weeks",
     description:
-      "An advanced login and identity system engineered from the ground up with security as the core priority.",
-    features: [
-      "Advanced multi-factor login security",
-      "End-to-end data encryption",
-      "Protection against common vulnerabilities",
-    ],
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuACS1PLPzKrG9yKRny0GKRkIAZXVTyw_0zSyxH2Xd4bHRmxf9MfNWU60k2Um4CKanTPn89r7-t2BwjJsLZXQ6Xhtdfza0bSpJiNO2k96BkQRD2pP-IY8-n5jS0V-ki3X6TwskNvqNMBPNlL2w--ek66mcowMJPN4sG_3GHDAeODhswJ5vFB7QVPN2y80dCD90DJ2Cwk9SYwbCW5st-4YcEgmkIw-Mn-fgim3cJVG8d7Asg0NiiILt70snr6ngYdsUP_v9PmGcdMXMr6",
-    imageAlt: "Secure login interface with security shield and encryption indicators",
+      "End-to-end MVP built, tested, and deployed in 21 days. Auth, API, mobile-responsive UI — production-ready from day one.",
+    tags: ["Next.js", "Supabase", "Tailwind", "Vercel"],
+    img: "/proj-ecommerce.png",
+    span: "col-span-1",
+    aspect: "aspect-[4/3]",
+  },
+  {
+    id: "04",
+    category: "Mobile + Web",
+    title: "Secure Auth System",
+    description:
+      "Zero-trust authentication with MFA, session management, OAuth, and end-to-end encryption across web and mobile.",
+    tags: ["TypeScript", "JWT", "Prisma", "Docker"],
+    img: "/proj-saas.png",
+    span: "col-span-1 md:col-span-2",
+    aspect: "aspect-[16/9]",
   },
 ];
 
 export default function WorkSection() {
   return (
-    <section id="work" className="py-24 px-6 lg:px-20 bg-surface">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <FadeIn direction="left">
-              <span className="text-primary-container text-sm font-bold tracking-[0.2em] uppercase">
-                Portfolio
-              </span>
-            </FadeIn>
-            <FadeIn direction="up" delay={0.1}>
-              <h2 className="text-4xl md:text-6xl font-black mt-4">
-                Our Work &amp; Projects
-              </h2>
-            </FadeIn>
-          </div>
-          <FadeIn direction="right" delay={0.2}>
-            <p className="text-zinc-500 max-w-sm">
-              We take pride in delivering solutions that solve real-world
-              problems and create value for our clients.
-            </p>
-          </FadeIn>
-        </div>
+    <section id="work" className="py-32 px-6 relative" style={{ backgroundColor: "#111" }}>
+      {/* Top glow */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
+        style={{
+          width: "80%",
+          height: "300px",
+          background: "radial-gradient(ellipse at 50% 0%, rgba(255,226,36,0.05) 0%, transparent 70%)",
+        }}
+      />
 
-        <StaggerChildren className="grid grid-cols-1 gap-12" staggerDelay={0.2}>
-          {projects.map((project) => (
-            <StaggerItem key={project.number}>
-              <div className="group relative overflow-hidden bg-surface-container-low">
-                <div className="relative aspect-16/8 overflow-hidden">
-                  <Image
-                    src={project.imageSrc}
-                    alt={project.imageAlt}
-                    fill
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 80vw"
-                  />
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 border border-yellow-400/20 rounded-full px-4 py-1.5 mb-4">
+              <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+              <span className="text-xs font-semibold text-zinc-400 tracking-widest uppercase">Portfolio</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight">
+              Our Work &amp; <span style={{ color: "#FFE224" }}>Projects</span>
+            </h2>
+          </div>
+          <p className="text-zinc-500 max-w-sm text-base leading-relaxed md:text-right">
+            Real products, real clients, real results. Each project is built
+            with security, performance, and scalability at its core.
+          </p>
+        </motion.div>
+
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-auto">
+          {projects.map((p, i) => (
+            <motion.div
+              key={p.id}
+              className={`group relative rounded-2xl overflow-hidden ${p.span}`}
+              style={{
+                background: "linear-gradient(145deg, #1a1a1a 0%, #111 100%)",
+                border: "1px solid rgba(255,255,255,0.07)",
+              }}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+              whileHover={{ y: -4 }}
+            >
+              {/* Image */}
+              <div className={`relative w-full ${p.aspect} overflow-hidden`}>
+                <Image
+                  src={p.img}
+                  alt={p.title}
+                  fill
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width:768px) 100vw, 66vw"
+                />
+                {/* Overlay gradient */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(to bottom, transparent 40%, rgba(17,17,17,0.95) 100%)",
+                  }}
+                />
+                {/* Category badge */}
+                <div className="absolute top-4 left-4">
+                  <span
+                    className="text-xs font-bold px-3 py-1.5 rounded-full tracking-wider uppercase"
+                    style={{ backgroundColor: "rgba(255,226,36,0.15)", color: "#FFE224", border: "1px solid rgba(255,226,36,0.25)" }}
+                  >
+                    {p.category}
+                  </span>
                 </div>
-                <div className="p-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                  <div className="flex-1">
-                    <h3 className="text-3xl font-bold mb-2">{project.title}</h3>
-                    <p className="text-zinc-400 mb-5">{project.description}</p>
-                    <ul className="space-y-1.5">
-                      {project.features.map((f) => (
-                        <li
-                          key={f}
-                          className="flex items-center gap-2 text-sm text-zinc-500"
-                        >
-                          <span className="material-symbols-outlined text-primary-container text-base">
-                            check_circle
-                          </span>
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="text-primary-container font-black text-6xl opacity-10 shrink-0">
-                    {project.number}
-                  </div>
+                {/* Number */}
+                <div
+                  className="absolute top-4 right-4 text-5xl font-black leading-none select-none"
+                  style={{ color: "rgba(255,255,255,0.06)" }}
+                >
+                  {p.id}
                 </div>
               </div>
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
 
-        <FadeIn direction="up" delay={0.2}>
-          <p className="text-center text-zinc-500 mt-16 text-lg">
-            We are continuously building innovative solutions —{" "}
-            <span style={{ color: "#FFE224" }} className="font-bold">
-              your project could be next.
-            </span>
-          </p>
-        </FadeIn>
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-xl font-black text-white mb-2 leading-tight">{p.title}</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed mb-4">{p.description}</p>
+                {/* Tech tags */}
+                <div className="flex flex-wrap gap-2">
+                  {p.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2.5 py-1 rounded-md font-medium"
+                      style={{ backgroundColor: "rgba(255,255,255,0.05)", color: "#a1a1aa", border: "1px solid rgba(255,255,255,0.07)" }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Hover yellow border glow */}
+              <div
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{ boxShadow: "inset 0 0 0 1px rgba(255,226,36,0.25), 0 0 30px rgba(255,226,36,0.06)" }}
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.p
+          className="text-center text-zinc-500 mt-16 text-base"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          We&apos;re always building something new —{" "}
+          <span className="font-bold" style={{ color: "#FFE224" }}>
+            your project could be next.
+          </span>
+        </motion.p>
       </div>
     </section>
   );
