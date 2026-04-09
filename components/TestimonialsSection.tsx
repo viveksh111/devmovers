@@ -5,26 +5,23 @@ import { motion } from "motion/react";
 const testimonials = [
   {
     id: "t1",
-    quote:
-      "DevMovers delivered exactly what we needed. The team was deeply professional, fast to respond, and truly understood our vision. The final product exceeded every expectation.",
+    quote: "DevMovers delivered exactly what we needed. The team was deeply professional, fast to respond, and truly understood our vision. The final product exceeded every expectation.",
     rating: 5,
-    avatarX: "0%",
+    role: "SaaS Founder",
     featured: false,
   },
   {
     id: "t2",
-    quote:
-      "Their security-first approach gave us complete confidence in our platform. Every architectural decision was made with our users' safety in mind. Truly world-class engineering.",
+    quote: "Their security-first approach gave us complete confidence in our platform. Every architectural decision was made with our users' safety in mind. Truly world-class engineering.",
     rating: 5,
-    avatarX: "50%",
+    role: "EdTech Co-founder",
     featured: true,
   },
   {
     id: "t3",
-    quote:
-      "Smooth communication, transparent process, and lightning-fast delivery. We always knew exactly what was happening. The best dev team we've ever worked with.",
+    quote: "Smooth communication, transparent process, and lightning-fast delivery. We always knew exactly what was happening. The best dev team we've ever worked with.",
     rating: 5,
-    avatarX: "100%",
+    role: "E-commerce CEO",
     featured: false,
   },
 ];
@@ -148,38 +145,9 @@ export default function TestimonialsSection() {
                 {t.quote}
               </p>
 
-              {/* Author */}
-              <div
-                className="flex items-center gap-3 pt-5"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
-              >
-                {/* Avatar cropped from combined image */}
-                <div
-                  className="shrink-0 w-12 h-12 rounded-full overflow-hidden"
-                  style={{
-                    border: t.featured
-                      ? "2px solid rgba(255,226,36,0.5)"
-                      : "2px solid rgba(255,255,255,0.1)",
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      backgroundImage: "url('/avatars.png')",
-                      backgroundSize: "300% auto",
-                      backgroundPosition: `${t.avatarX} 44%`,
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  />
-                </div>
-                <div>
-                  <p className="text-zinc-400 text-sm font-medium">Verified Client</p>
-                  <div className="flex items-center gap-1 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                    <p className="text-xs text-zinc-600">Confirmed review</p>
-                  </div>
-                </div>
+              <div className="flex items-center gap-2 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0" />
+                <p className="text-xs text-zinc-500 font-medium">{t.role}</p>
               </div>
             </motion.div>
           ))}
@@ -196,7 +164,7 @@ export default function TestimonialsSection() {
           {[
             { value: "30+", label: "Projects Delivered" },
             { value: "98%", label: "Client Satisfaction" },
-            { value: "4h", label: "Avg. Response Time" },
+            { value: "2h", label: "Avg. Response Time" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p

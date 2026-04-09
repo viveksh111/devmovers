@@ -107,12 +107,28 @@ export default function Navbar() {
         </div>
 
         {/* Desktop CTA */}
-        <Link
+        <motion.a
           href="/contact"
-          className="hidden md:inline-block bg-primary-container text-on-primary-container font-bold text-xs px-4 py-2 rounded-full hover:scale-105 active:scale-90 transition-transform whitespace-nowrap shrink-0"
+          className="hidden md:inline-flex items-center gap-1.5 relative overflow-hidden font-bold text-xs px-4 py-2 rounded-full whitespace-nowrap shrink-0"
+          style={{ backgroundColor: "#FFE224", color: "#131313" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.92 }}
+          transition={{ type: "spring", stiffness: 380, damping: 20 }}
         >
-          Get Free Consultation
-        </Link>
+          <motion.span
+            className="absolute inset-0 -translate-x-full pointer-events-none"
+            style={{ background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%)" }}
+            whileHover={{ translateX: "200%" }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+          />
+          <span className="relative">Get Free Consultation</span>
+          <motion.span
+            className="relative text-xs"
+            initial={{ x: 0 }}
+            whileHover={{ x: 2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+          >→</motion.span>
+        </motion.a>
 
         {/* Mobile hamburger */}
         <button

@@ -129,12 +129,23 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
-          <Link
+          <motion.a
             href="/contact"
-            className="inline-block bg-primary-container text-on-primary-container px-10 py-4 rounded-full font-bold text-base hover:scale-105 active:scale-95 transition-transform"
+            className="relative inline-flex items-center gap-2 overflow-hidden px-10 py-4 rounded-full font-bold text-base"
+            style={{ backgroundColor: "#FFE224", color: "#131313" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 380, damping: 20 }}
           >
-            Get Free Consultation
-          </Link>
+            <motion.span
+              className="absolute inset-0 -translate-x-full pointer-events-none"
+              style={{ background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%)" }}
+              whileHover={{ translateX: "200%" }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
+            />
+            <span className="relative">Get Free Consultation</span>
+            <motion.span className="relative" whileHover={{ x: 3 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>→</motion.span>
+          </motion.a>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 border border-outline-variant/30 text-zinc-300 hover:text-white hover:border-white/50 transition-all px-8 py-4 rounded-full font-semibold text-sm"
