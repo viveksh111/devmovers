@@ -1,0 +1,61 @@
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+export async function sendInternalNotification(data: {
+  name: string;
+  email: string;
+  phone: string;
+  budget: string;
+  description: string;
+}) {
+  await resend.emails.send({
+    from: 'DevMovers Contact <info@devmovers.com>',
+    to: [process.env.NOTIFY_EMAIL ?? 'info@devmovers.com'],
+    replyTo: data.email,
+    subject: `New Project Inquiry from ${data.name}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#131313;color:#e5e2e1;padding:32px;border-radius:16px;">
+        <h1 style="color:#FFE224;font-size:24px;margin-bottom:8px;">New Project Inquiry</h1>
+        <p style="color:#a1a1aa;margin-bottom:24px;">Someone submitted a project brief on DevMovers.</p>
+        <table style="width:100%;border-collapse:collapse;">
+          <tr style="border-bottom:1px solid #2a2a2a;"><td style="padding:12px 0;color:#71717a;font-size:13px;width:140px;">Name</td><td style="padding:12px 0;color:#fff;font-weight:600;">${data.name}</td></tr>
+          <tr style="border-bottom:1px solid #2a2a2a;"><td style="padding:12px 0;color:#71717a;font-size:13px;">Email</td><td style="padding:12px 0;"><a href="mailto:${data.email}" style="color:#FFE224;">${data.email}</a></td></tr>
+          <tr style="border-bottom:1px solid #2a2a2a;"><td style="padding:12px 0;color:#71717a;font-size:13px;">Phone / WhatsApp</td><td style="padding:12px 0;color:#fff;">${data.phone || '—'}</td></tr>
+          <tr style="border-bottom:1px solid #2a2a2a;"><td style="padding:12px 0;color:#71717a;font-size:13px;">Budget</td><td style="padding:12px 0;color:#fff;">${data.budget || 'Not specified'}</td></tr>
+          <tr><td style="padding:12px 0;color:#71717a;font-size:13px;vertical-align:top;">Project Details</td><td style="padding:12px 0;color:#fff;white-space:pre-wrap;">${data.description}</td></tr>
+        </table>
+        <div style="margin-top:32px;padding:16px;background:rgba(255,226,36,0.08);border-radius:8px;border-left:3px solid #FFE224;">
+          <p style="color:#a1a1aa;font-size:12px;margin:0;">Reply directly to this email to respond to ${data.name}.</p>
+        </div>
+      </div>
+    `,
+  });
+}
+
+export async function sendClientConfirmation(data: {
+  name: string;
+  email: string;
+  description: string;
+}) {
+  await resend.emails.send({
+    from: 'DevMovers <info@devmovers.com>',
+    to: [data.email],
+    subject: 'We received your inquiry — DevMovers',
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#131313;color:#e5e2e1;padding:32px;border-radius:16px;">
+        <h1 style="color:#FFE224;font-size:24px;margin-bottom:8px;">Thanks, ${data.name}!</h1>
+        <p style="color:#a1a1aa;line-height:1.6;">We've received your project inquiry and will get back to you within <strong style="color:#fff;">4 hours</strong>.</p>
+        <div style="margin:24px 0;padding:20px;background:#1c1b1b;border-radius:12px;">
+          <p style="color:#71717a;font-size:13px;margin:0 0 8px;">Your project brief:</p>
+          <p style="color:#e5e2e1;margin:0;white-space:pre-wrap;font-size:14px;">${data.description}</p>
+        </div>
+        <p style="color:#a1a1aa;font-size:13px;">In the meantime, feel free to reach us at <a href="mailto:info@devmovers.com" style="color:#FFE224;">info@devmovers.com</a> or schedule a free call.</p>
+        <div style="margin-top:32px;text-align:center;">
+          <a href="https://cal.com/devmovers" style="display:inline-block;background:#FFE224;color:#131313;font-weight:700;padding:14px 28px;border-radius:999px;text-decoration:none;font-size:14px;">Book a Free Discovery Call</a>
+        </div>
+        <p style="color:#3f3f46;font-size:12px;margin-top:32px;text-align:center;">DevMovers — Secure, Scalable &amp; High-Performance Digital Products</p>
+      </div>
+    `,
+  });
+}
