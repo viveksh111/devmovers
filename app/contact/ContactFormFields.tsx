@@ -12,16 +12,31 @@ export const fadeUp = {
   }),
 };
 
+function FieldError({ message }: { message?: string }) {
+  return (
+    <AnimatePresence>
+      {message && (
+        <motion.p
+          initial={{ opacity: 0, y: -4, height: 0 }}
+          animate={{ opacity: 1, y: 0, height: "auto" }}
+          exit={{ opacity: 0, y: -4, height: 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          className="text-xs text-red-400 mt-1.5 flex items-center gap-1"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+            <circle cx="6" cy="6" r="6" opacity="0.2" />
+            <path d="M6 3.5v3M6 8h.01" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+          </svg>
+          {message}
+        </motion.p>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export function InputField({
-  label,
-  id,
-  type = "text",
-  placeholder,
-  value,
-  onChange,
-  required,
-  index,
-  hint,
+  label, id, type = "text", placeholder, value, onChange, onBlur,
+  required, index, hint, error,
 }: {
   label: string;
   id: string;
@@ -29,11 +44,14 @@ export function InputField({
   placeholder: string;
   value: string;
   onChange: (v: string) => void;
+  onBlur?: () => void;
   required?: boolean;
   index: number;
   hint?: string;
+  error?: string;
 }) {
   const [focused, setFocused] = useState(false);
+  const hasError = Boolean(error);
 
   return (
     <motion.div variants={fadeUp} custom={index}>
@@ -46,8 +64,12 @@ export function InputField({
         style={{
           borderWidth: "1px",
           borderStyle: "solid",
-          borderColor: focused ? "#FFE224" : "rgba(255,255,255,0.08)",
-          boxShadow: focused ? "0 0 0 3px rgba(255,226,36,0.08)" : "none",
+          borderColor: hasError ? "#f87171" : focused ? "#FFE224" : "rgba(255,255,255,0.08)",
+          boxShadow: hasError
+            ? "0 0 0 3px rgba(248,113,113,0.08)"
+            : focused
+            ? "0 0 0 3px rgba(255,226,36,0.08)"
+            : "none",
         }}
       >
         <input
@@ -58,21 +80,17 @@ export function InputField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
+          onBlur={() => { setFocused(false); onBlur?.(); }}
           className="w-full bg-transparent px-4 py-3.5 text-sm text-white placeholder-zinc-600 outline-none rounded-lg"
         />
       </div>
+      <FieldError message={error} />
     </motion.div>
   );
 }
 
 export function SelectField({
-  label,
-  id,
-  value,
-  onChange,
-  options,
-  index,
+  label, id, value, onChange, options, index,
 }: {
   label: string;
   id: string;
@@ -97,7 +115,6 @@ export function SelectField({
       <label htmlFor={id} className="block text-sm font-semibold text-zinc-300 mb-2">
         {label}
       </label>
-
       <button
         id={id}
         type="button"
@@ -170,21 +187,19 @@ export function SelectField({
 }
 
 export function TextAreaField({
-  label,
-  id,
-  placeholder,
-  value,
-  onChange,
-  index,
+  label, id, placeholder, value, onChange, onBlur, index, error,
 }: {
   label: string;
   id: string;
   placeholder: string;
   value: string;
   onChange: (v: string) => void;
+  onBlur?: () => void;
   index: number;
+  error?: string;
 }) {
   const [focused, setFocused] = useState(false);
+  const hasError = Boolean(error);
 
   return (
     <motion.div variants={fadeUp} custom={index}>
@@ -196,8 +211,12 @@ export function TextAreaField({
         style={{
           borderWidth: "1px",
           borderStyle: "solid",
-          borderColor: focused ? "#FFE224" : "rgba(255,255,255,0.08)",
-          boxShadow: focused ? "0 0 0 3px rgba(255,226,36,0.08)" : "none",
+          borderColor: hasError ? "#f87171" : focused ? "#FFE224" : "rgba(255,255,255,0.08)",
+          boxShadow: hasError
+            ? "0 0 0 3px rgba(248,113,113,0.08)"
+            : focused
+            ? "0 0 0 3px rgba(255,226,36,0.08)"
+            : "none",
         }}
       >
         <textarea
@@ -206,11 +225,12 @@ export function TextAreaField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
+          onBlur={() => { setFocused(false); onBlur?.(); }}
           rows={5}
           className="w-full bg-transparent px-4 py-3.5 text-sm text-white placeholder-zinc-600 outline-none resize-none rounded-lg"
         />
       </div>
+      <FieldError message={error} />
     </motion.div>
   );
 }
