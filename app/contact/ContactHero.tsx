@@ -40,7 +40,7 @@ export function ContactHero() {
             <span className="text-sm font-medium">info@devmovers.com</span>
           </a>
           <a
-            href="https://wa.me/"
+            href="https://wa.me/916266652703"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 text-zinc-400 hover:text-yellow-400 transition-colors group"

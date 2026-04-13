@@ -1,26 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'motion/react';
 import Logo from './Logo';
+import { navLinks } from '@/lib/data/nav';
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
-function smoothScrollTo(hash: string) {
-  const id = hash.replace('#', '');
-  const el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
+
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -28,27 +20,8 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = [
-    { href: '#services', label: 'Services' },
-    { href: '#about', label: 'About' },
-    { href: '#work', label: 'Work' },
-    { href: '#process', label: 'Process' },
-    { href: '#testimonials', label: 'Clients' },
-    { href: '/contact', label: 'Contact' },
-  ];
 
-  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Full-page route — let Next.js handle it
-    if (href.startsWith('/')) return;
-    e.preventDefault();
-    setMobileOpen(false);
-    if (pathname !== '/') {
-      // Navigate home first; browser will scroll to hash on arrival
-      router.push('/' + href);
-    } else {
-      smoothScrollTo(href);
-    }
-  };
+
 
   return (
     <motion.nav
@@ -82,26 +55,15 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-5 text-xs font-semibold font-(family-name:--font-plus-jakarta-sans) tracking-tight">
-          {navLinks.map((link) =>
-            link.href.startsWith('/') ? (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNav(e, link.href)}
-                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300"
-              >
-                {link.label}
-              </a>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href.startsWith('/') ? link.href : `/${link.href}`}
+              className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         <MotionLink
@@ -149,31 +111,21 @@ export default function Navbar() {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.25 }}
         >
-          {navLinks.map((link) =>
-            link.href.startsWith('/') ? (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300 font-semibold"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNav(e, link.href)}
-                className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300 font-semibold"
-              >
-                {link.label}
-              </a>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href.startsWith('/') ? link.href : `/${link.href}`}
+              onClick={() => setMobileOpen(false)}
+              className="text-zinc-400 hover:text-yellow-400 transition-colors duration-300 font-semibold"
+            >
+              {link.label}
+            </Link>
+          ))}
           <Link
             href="/contact"
             onClick={() => setMobileOpen(false)}
-            className="mt-2 bg-primary-container text-on-primary-container font-bold text-sm px-6 py-3 rounded-full text-center"
+            className="mt-2 font-bold text-sm px-6 py-3 rounded-full text-center text-zinc-950"
+            style={{ backgroundColor: "#FFE224" }}
           >
             Get Free Consultation
           </Link>

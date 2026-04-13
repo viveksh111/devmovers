@@ -1,111 +1,172 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { FadeIn, StaggerChildren, StaggerItem } from "./AnimationWrappers";
+import { motion } from "motion/react";
+import { posts } from "@/lib/data/posts";
 
-type BlogPost = {
-  id: string;
-  category: string;
-  title: string;
-  excerpt: string;
-  readTime: string;
-  imageSrc: string;
-  imageAlt: string;
-};
-
-const posts: BlogPost[] = [
-  {
-    id: "ai-pilot-plan",
-    category: "Strategy",
-    title: "AI pilot plan: 30 days to first results",
-    excerpt:
-      "How we implement intelligent workflows in legacy systems without breaking the bank.",
-    readTime: "5 min read",
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCItZUP9tYOehJYw8yHfLsNj9VL-Ytt7WqeGN2qVBtkDJGVTHKsbM8asyuzaCTqvmLED7Pm_Xi6cW0dvOzMk4iTR9ix3YBcYD9THBD9p-DOnaEl5lAstYd8vfptikD-VxBhB5RGW83QTnoMcbnho4ezuezK11wzCrN_Sx9v7RoQFdyES_4syoZfGMBJ2-8bwSD4YtW7zPQWOj760yVr61wWMSW9EbbSIKkVxCDpR8Q5bu8QMfPQLxBQUvSFKAH-0DnWcxWTJi--qPuB",
-    imageAlt: "Close up of a glowing AI neural processor",
-  },
-  {
-    id: "scaling-beyond-mvp",
-    category: "Engineering",
-    title: "Scaling Beyond the MVP",
-    excerpt:
-      "Structural patterns for handling 100k+ concurrent users on day one.",
-    readTime: "8 min read",
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuB0YlXyI5E1Oc7NPQvvWW3kUeAJT63hlN4r2CeS33hgHTWs4Q8OaVCGA6jQ1P82exR7Oq2UuYR57KwJ4BiUMs1g9HJ-u_KU6ldEZJTi5oFBLtwcmsy8E81V1rAP1TP4ICNJlDpqE_C1mqFgvvz_FPsaYe6I2SRHcs9CaA_wEViYracVaLIDxmxuNQYlRdqmXMbGidxrULDC6Sr48xPN4p59Lv2l4cBnM0GREzvgTSrt6g8TZsd55IZIl5Ya47eGcSebVK1JadYBvekU",
-    imageAlt: "Digital blocks moving through a blue grid space",
-  },
-  {
-    id: "security-first-architect",
-    category: "Security",
-    title: "The Security-First Architect",
-    excerpt:
-      "Why we build zero-trust environments from the first line of code.",
-    readTime: "12 min read",
-    imageSrc:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAofLXs5GjgDyCfgyXXExUMmb2uVcZtAGdSxJf1EYamMKj8J9F32kNfCdM4AD0_YTjQAPZOLyjMBdIc51_604P5MllUyv1fUR4k-hfyobpigU_SqBmExKVp740J2VbV2YKd2xxurQaunnnI4sD8L49CQSbfPVu9a-nus_pEGoD322ea_OX-RuahhISvUPxoIJX_bBEOfVNrQC2tHNjLP-GNaJxvUXFFBTV-6cekE1SqFviXLFm43YShhnOp-kaDR1y0lgzm9ejB8Pun",
-    imageAlt: "Highly technical green computer code on a dark screen",
-  },
-];
+const featured = posts.find((p) => p.featured)!;
+const previews = posts.filter((p) => !p.featured).slice(0, 2);
 
 export default function BlogSection() {
   return (
-    <section
-      id="blog"
-      className="py-24 px-6 lg:px-20 bg-surface-container-lowest"
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-end mb-16">
-          <FadeIn direction="up">
-            <h2 className="text-4xl md:text-5xl font-black">
-              Inside the Engine
+    <section id="blog" className="relative py-28 px-6 lg:px-20 bg-zinc-950 overflow-hidden">
+      {/* Ambient glow */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2"
+        style={{
+          width: "700px", height: "400px",
+          background: "radial-gradient(ellipse at 50% 0%, rgba(255,226,36,0.06) 0%, transparent 70%)",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 border border-yellow-400/20 rounded-full px-4 py-1.5 mb-5">
+              <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-bold text-zinc-400 tracking-widest uppercase">From the Team</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-black leading-tight">
+              Inside the <span style={{ color: "#FFE224" }}>Engine</span>
             </h2>
-          </FadeIn>
-          <FadeIn direction="left" delay={0.1}>
+          </div>
+          <Link
+            href="/blog"
+            className="shrink-0 inline-flex items-center gap-2 text-sm font-bold transition-colors duration-200 group"
+            style={{ color: "#FFE224" }}
+          >
+            View all articles
+            <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </Link>
+        </motion.div>
+
+        {/* Layout: featured large + two stacked */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 items-stretch">
+
+          {/* Featured */}
+          <motion.div
+            className="lg:col-span-3"
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <Link
-              href="#"
-              className="text-primary-container font-bold flex items-center gap-2 group"
+              href={`/blog/${featured.slug}`}
+              className="group flex flex-col h-full rounded-2xl border border-zinc-800/60 overflow-hidden hover:border-yellow-400/20 transition-colors duration-300"
+              style={{ backgroundColor: "rgba(255,255,255,0.015)" }}
             >
-              View all posts{" "}
-              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
-                arrow_forward
-              </span>
+              <div className="relative aspect-video overflow-hidden">
+                <Image
+                  src={featured.imageSrc}
+                  alt={featured.imageAlt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  priority
+                />
+                <div className="absolute top-4 left-4">
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full backdrop-blur-sm"
+                    style={{
+                      backgroundColor: `${featured.categoryColor}20`,
+                      color: featured.categoryColor,
+                      border: `1px solid ${featured.categoryColor}30`,
+                    }}
+                  >
+                    {featured.category}
+                  </span>
+                </div>
+              </div>
+              <div className="p-7 flex flex-col flex-1">
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-3 leading-snug group-hover:text-yellow-400 transition-colors duration-300">
+                  {featured.title}
+                </h3>
+                <p className="text-zinc-500 text-sm leading-relaxed flex-1 mb-5">{featured.excerpt}</p>
+                <div className="flex items-center justify-between text-xs text-zinc-600 pt-4 border-t border-zinc-800/40">
+                  <span>{featured.date}</span>
+                  <span>{featured.readTime}</span>
+                </div>
+              </div>
             </Link>
-          </FadeIn>
+          </motion.div>
+
+          {/* Two smaller cards stacked */}
+          <div className="lg:col-span-2 flex flex-col gap-5">
+            {previews.map((post, i) => (
+              <motion.div
+                key={post.id}
+                className="flex-1"
+                initial={{ opacity: 0, x: 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: i * 0.1, ease: "easeOut" }}
+              >
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col h-full rounded-2xl border border-zinc-800/60 overflow-hidden hover:border-yellow-400/20 transition-colors duration-300"
+                  style={{ backgroundColor: "rgba(255,255,255,0.015)" }}
+                >
+                  <div className="relative h-36 overflow-hidden">
+                    <Image
+                      src={post.imageSrc}
+                      alt={post.imageAlt}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <span
+                        className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                        style={{
+                          backgroundColor: `${post.categoryColor}20`,
+                          color: post.categoryColor,
+                          border: `1px solid ${post.categoryColor}30`,
+                        }}
+                      >
+                        {post.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="text-sm font-black text-white mb-1.5 leading-snug group-hover:text-yellow-400 transition-colors duration-300">
+                      {post.title}
+                    </h3>
+                    <p className="text-zinc-600 text-xs leading-relaxed flex-1 mb-3 line-clamp-2">{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-[10px] text-zinc-700 pt-3 border-t border-zinc-800/40">
+                      <span>{post.date}</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        <StaggerChildren
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          staggerDelay={0.15}
+        {/* Bottom CTA */}
+        <motion.div
+          className="mt-10 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {posts.map((post) => (
-            <StaggerItem key={post.id}>
-              <article className="bg-surface-container-low group cursor-pointer h-full">
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src={post.imageSrc}
-                    alt={post.imageAlt}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <div className="p-8">
-                  <div className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-3">
-                    {post.category}
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 leading-tight group-hover:text-primary-container transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-zinc-400 text-sm mb-6">{post.excerpt}</p>
-                  <div className="text-zinc-500 text-xs font-medium italic">
-                    {post.readTime}
-                  </div>
-                </div>
-              </article>
-            </StaggerItem>
-          ))}
-        </StaggerChildren>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 font-black text-sm px-8 py-3.5 rounded-full hover:scale-105 active:scale-95 transition-transform border border-zinc-700 text-zinc-300 hover:border-yellow-400/40 hover:text-white"
+          >
+            Browse all {posts.length} articles →
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

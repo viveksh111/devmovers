@@ -145,7 +145,7 @@ export function ConsultationCard() {
       >
         <p className="text-xs text-zinc-600 mb-4">100% free &amp; non-binding · 30 min</p>
         <motion.a
-          href="https://cal.com/devmovers"
+          href="https://cal.com/devmovers/project-discussion"
           target="_blank"
           rel="noopener noreferrer"
           className="relative inline-flex items-center gap-2.5 font-black text-sm px-7 py-3.5 rounded-full overflow-hidden group"

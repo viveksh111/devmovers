@@ -99,14 +99,16 @@ body {
   font-family: var(--font-body);
   background-color: #131313;
   color: #e5e2e1;
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
-/* Always show scrollbar track to prevent layout shift */
+/* scroll container = html; smooth + padding for fixed navbar */
 html {
   overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
+
 
 
 h1,

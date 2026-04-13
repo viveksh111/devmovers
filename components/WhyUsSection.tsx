@@ -1,134 +1,190 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { motion } from "motion/react";
 import { FadeIn, StaggerChildren, StaggerItem } from "./AnimationWrappers";
+import { reasons, type Reason } from "@/lib/data/whyus";
 
-const reasons = [
-  {
-    title: "Full-Stack Expertise",
-    description: "One team covers everything — frontend, backend, infrastructure, and security. No handoffs, no gaps.",
-    svg: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="6 8 2 12 6 16" />
-        <polyline points="14 8 18 12 14 16" />
-        <line x1="11" y1="6" x2="9" y2="18" />
-      </svg>
-    ),
-  },
-  {
-    title: "Security-First Approach",
-    description: "Security is baked in from day one — not bolted on at the end. Your data and users are always protected.",
-    svg: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M10 2L3 5v5c0 4 3.1 7.4 7 8 3.9-.6 7-4 7-8V5z" />
-        <polyline points="7 10 9 12 13 8" />
-      </svg>
-    ),
-  },
-  {
-    title: "Fast & Reliable Delivery",
-    description: "We ship on time without cutting corners. Structured sprints, clear milestones, no last-minute surprises.",
-    svg: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="10" cy="10" r="8" />
-        <polyline points="10 6 10 10 13 12" />
-      </svg>
-    ),
-  },
-  {
-    title: "Transparent Communication",
-    description: "You always know what's happening. Regular updates, open channels, and honest timelines — always.",
-    svg: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 13a2 2 0 01-2 2H6l-4 3V5a2 2 0 012-2h12a2 2 0 012 2z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Built to Scale With You",
-    description: "We build for where you're going, not just where you are today. Every decision is made with growth in mind.",
-    svg: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="3 17 7 11 11 14 17 5" />
-        <polyline points="14 5 17 5 17 8" />
-      </svg>
-    ),
-  },
+const ReasonIcons: Record<Reason["icon"], ReactNode> = {
+  code: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
+    </svg>
+  ),
+  shield: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <polyline points="9 12 11 14 15 10" />
+    </svg>
+  ),
+  bolt: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+    </svg>
+  ),
+  chat: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  ),
+  rocket: (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+    </svg>
+  ),
+};
+
+const terminalLines = [
+  { text: "$ git push origin main", color: "#a1a1aa" },
+  { text: "✓ Build completed in 18s", color: "#4ade80" },
+  { text: "✓ 47 tests passed", color: "#4ade80" },
+  { text: "✓ Security scan clean", color: "#4ade80" },
+  { text: "✓ Deployed to production", color: "#FFE224" },
+  { text: "🚀 Live → yourapp.com", color: "#FFE224" },
 ];
 
-const steps = [
-  {
-    number: "01",
-    label: "Discovery",
-    detail: "We listen first. A focused call to understand your goals, constraints, and vision.",
-  },
-  {
-    number: "02",
-    label: "Strategy & Scope",
-    detail: "We map out exactly what to build, how long it takes, and what it costs — no vague estimates.",
-  },
-  {
-    number: "03",
-    label: "Design & Build",
-    detail: "Iterative sprints with real previews. You see progress every week, not just at the end.",
-  },
-  {
-    number: "04",
-    label: "Review & Launch",
-    detail: "You sign off on every detail before we go live. Zero surprises on launch day.",
-  },
-  {
-    number: "05",
-    label: "Ongoing Partnership",
-    detail: "We stay available after launch — monitoring, updates, and new features as you grow.",
-  },
-];
+const CIRC = 2 * Math.PI * 38;
 
-function ProcessTimeline() {
+function RightPanel() {
   return (
-    <div className="relative flex flex-col gap-0">
-      {steps.map((step, i) => (
-        <motion.div
-          key={step.number}
-          className="relative flex gap-5 pb-8 last:pb-0"
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.45, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          <div className="flex flex-col items-center">
-            <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-black shrink-0 z-10"
-              style={{ backgroundColor: "#FFE224", color: "#131313" }}
-            >
-              {step.number}
-            </div>
-            {i < steps.length - 1 && (
-              <motion.div
-                initial={{ scaleY: 0 }}
-                whileInView={{ scaleY: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 + 0.3, ease: "easeOut" }}
-                style={{ transformOrigin: "top", backgroundColor: "rgba(255,226,36,0.18)", minHeight: 28, width: 1, marginTop: 8, borderRadius: 999, flex: 1 }}
-              />
-            )}
-          </div>
+    <div className="w-full max-w-[440px] mx-auto space-y-4">
 
-          <div className="pt-1.5 pb-2">
-            <p className="text-sm font-bold text-white mb-1">{step.label}</p>
-            <p className="text-xs text-zinc-500 leading-relaxed">{step.detail}</p>
+      {/* ── Terminal card ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+        className="rounded-2xl overflow-hidden"
+        style={{
+          background: "#0c0c0c",
+          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow: "0 0 50px rgba(255,226,36,0.07), 0 20px 60px rgba(0,0,0,0.6)",
+        }}
+      >
+        {/* Mac-style header */}
+        <div className="flex items-center gap-2 px-4 py-3.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.02)" }}>
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+          <div className="flex items-center gap-1.5 ml-3">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[11px] text-zinc-500 font-mono tracking-tight">devmovers ~ production</span>
+          </div>
+        </div>
+
+        {/* Terminal content */}
+        <div className="p-5 font-mono text-sm space-y-2.5">
+          {terminalLines.map((line, i) => (
+            <motion.p
+              key={i}
+              style={{ color: line.color }}
+              initial={{ opacity: 0, x: -8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.4 + i * 0.22, ease: "easeOut" }}
+            >
+              {line.text}
+            </motion.p>
+          ))}
+          <motion.span
+            className="inline-block w-2 h-[16px] rounded-sm"
+            style={{ backgroundColor: "#FFE224", verticalAlign: "middle" }}
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+      </motion.div>
+
+      {/* ── 3 stat cards ── */}
+      <div className="grid grid-cols-3 gap-4">
+
+        {/* 98% circular */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="rounded-2xl p-4 flex flex-col items-center gap-2"
+          style={{ background: "linear-gradient(145deg,#1a1a1a,#111)", border: "1px solid rgba(255,255,255,0.07)" }}
+        >
+          <div className="relative">
+            <svg width="72" height="72" viewBox="0 0 88 88">
+              <circle cx="44" cy="44" r="38" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="7" />
+              <motion.circle
+                cx="44" cy="44" r="38"
+                fill="none"
+                stroke="#FFE224"
+                strokeWidth="7"
+                strokeLinecap="round"
+                strokeDasharray={CIRC}
+                initial={{ strokeDashoffset: CIRC }}
+                whileInView={{ strokeDashoffset: CIRC * 0.02 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.6, delay: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                style={{ transform: "rotate(-90deg)", transformOrigin: "44px 44px" }}
+              />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-base font-black text-white">98%</span>
+            </div>
+          </div>
+          <p className="text-[10px] text-zinc-500 font-medium text-center leading-tight">Client Satisfaction</p>
+        </motion.div>
+
+        {/* 30+ projects */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="rounded-2xl p-4 flex flex-col justify-between"
+          style={{ background: "linear-gradient(145deg,#1a1900,#111)", border: "1px solid rgba(255,226,36,0.15)" }}
+        >
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center mb-3" style={{ background: "rgba(255,226,36,0.12)" }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFE224" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-2xl font-black" style={{ color: "#FFE224" }}>30+</p>
+            <p className="text-[10px] text-zinc-500 mt-0.5 leading-tight">Projects Delivered</p>
           </div>
         </motion.div>
-      ))}
+
+        {/* 2-4 weeks */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="rounded-2xl p-4 flex flex-col justify-between"
+          style={{ background: "linear-gradient(145deg,#1a1a1a,#111)", border: "1px solid rgba(255,255,255,0.07)" }}
+        >
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center mb-3" style={{ background: "rgba(255,226,36,0.12)" }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFE224" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+            </svg>
+          </div>
+          <div>
+            <p className="text-2xl font-black text-white">2–4</p>
+            <p className="text-[10px] text-zinc-500 mt-0.5 leading-tight">Weeks to Ship</p>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
 
 export default function WhyUsSection() {
   return (
-    <section id="why-us" className="py-32 px-6 lg:px-20 bg-surface-container-lowest overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+    <section id="why-us" className="py-32 px-6 lg:px-20 overflow-hidden" style={{ backgroundColor: "#0f0f0f" }}>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
+        {/* Left: reasons list */}
         <div>
           <FadeIn direction="up">
             <div className="inline-flex items-center gap-2 border border-yellow-400/20 rounded-full px-4 py-1.5 mb-6">
@@ -140,19 +196,15 @@ export default function WhyUsSection() {
             </h2>
           </FadeIn>
 
-          <StaggerChildren className="space-y-7" staggerDelay={0.09}>
+          <StaggerChildren className="space-y-7" staggerDelay={0.1}>
             {reasons.map((r) => (
               <StaggerItem key={r.title}>
                 <div className="flex gap-4 group">
                   <div
-                    className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:scale-105"
-                    style={{
-                      backgroundColor: "rgba(255,226,36,0.08)",
-                      border: "1px solid rgba(255,226,36,0.18)",
-                      color: "#FFE224",
-                    }}
+                    className="w-11 h-11 shrink-0 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110"
+                    style={{ backgroundColor: "rgba(255,226,36,0.1)", border: "1px solid rgba(255,226,36,0.2)", color: "#FFE224" }}
                   >
-                    {r.svg}
+                    {ReasonIcons[r.icon]}
                   </div>
                   <div>
                     <h4 className="text-base font-bold text-white mb-1">{r.title}</h4>
@@ -164,16 +216,15 @@ export default function WhyUsSection() {
           </StaggerChildren>
         </div>
 
-        <div>
-          <FadeIn direction="up" delay={0.15}>
-            <div className="mb-8">
-              <p className="text-xs font-semibold text-zinc-600 tracking-widest uppercase mb-1">How We Work</p>
-              <h3 className="text-2xl font-black text-white">From idea to live product</h3>
-            </div>
-            <ProcessTimeline />
-          </FadeIn>
-        </div>
-
+        {/* Right: terminal + stats */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          <RightPanel />
+        </motion.div>
       </div>
     </section>
   );

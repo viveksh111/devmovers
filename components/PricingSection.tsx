@@ -1,54 +1,9 @@
 import { FadeIn, StaggerChildren, StaggerItem } from "./AnimationWrappers";
-
-type PricingTier = {
-  id: string;
-  badge?: string;
-  title: string;
-  subtitle: string;
-  price: string;
-  period: string;
-  features: string[];
-  highlighted: boolean;
-  ctaLabel: string;
-};
-
-const tiers: PricingTier[] = [
-  {
-    id: "launch",
-    title: "Product Launch",
-    subtitle: "Perfect for seed-stage startups needing a robust MVP.",
-    price: "$12,000",
-    period: "/proj",
-    features: [
-      "UI/UX Design System",
-      "Core Feature Engineering",
-      "Cloud Infrastructure Setup",
-      "30 Days Post-Launch Support",
-    ],
-    highlighted: false,
-    ctaLabel: "Start Now",
-  },
-  {
-    id: "partnership",
-    badge: "Most Popular",
-    title: "Full Partnership",
-    subtitle: "Ongoing engineering and strategic AI product design.",
-    price: "$8,500",
-    period: "/mo",
-    features: [
-      "Unlimited Feature Development",
-      "Priority AI Implementation",
-      "Scalability Audits & Tuning",
-      "24/7 Dedicated Slack Channel",
-    ],
-    highlighted: true,
-    ctaLabel: "Get Started",
-  },
-];
+import { pricingTiers } from "@/lib/data/pricing";
 
 export default function PricingSection() {
   return (
-    <section className="py-32 px-6 lg:px-20 bg-surface">
+    <section className="py-32 px-6 lg:px-20 bg-zinc-950">
       <div className="max-w-7xl mx-auto">
         <FadeIn direction="up" className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-black mb-6">
@@ -63,15 +18,16 @@ export default function PricingSection() {
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto"
           staggerDelay={0.15}
         >
-          {tiers.map((tier) => (
+          {pricingTiers.map((tier) => (
             <StaggerItem key={tier.id}>
               <div
-                className={`p-12 flex flex-col justify-between h-full ${
+                className={`p-12 flex flex-col justify-between h-full rounded-2xl ${
                   tier.highlighted
-                    ? "bg-primary-container text-on-primary-container"
-                    : "bg-surface-container-low"
+                    ? "text-zinc-950"
+                    : "bg-zinc-900"
                 }`}
-              >
+                style={tier.highlighted ? { backgroundColor: "#FFE224" } : {}}
+>
                 <div>
                   {tier.badge && (
                     <div className="bg-black/10 inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest mb-4">
@@ -108,10 +64,10 @@ export default function PricingSection() {
                   </ul>
                 </div>
                 <button
-                  className={`w-full py-4 font-bold transition-colors ${
+                  className={`w-full py-4 font-bold transition-colors rounded-xl ${
                     tier.highlighted
                       ? "bg-zinc-950 text-white hover:bg-zinc-800"
-                      : "border border-outline-variant text-white hover:bg-white hover:text-black"
+                      : "border border-zinc-700 text-white hover:bg-white hover:text-black"
                   }`}
                 >
                   {tier.ctaLabel}

@@ -52,7 +52,7 @@ export async function sendClientConfirmation(data: {
         </div>
         <p style="color:#a1a1aa;font-size:13px;">In the meantime, feel free to reach us at <a href="mailto:info@devmovers.com" style="color:#FFE224;">info@devmovers.com</a> or schedule a free call.</p>
         <div style="margin-top:32px;text-align:center;">
-          <a href="https://cal.com/devmovers" style="display:inline-block;background:#FFE224;color:#131313;font-weight:700;padding:14px 28px;border-radius:999px;text-decoration:none;font-size:14px;">Book a Free Discovery Call</a>
+          <a href="https://cal.com/devmovers/project-discussion" style="display:inline-block;background:#FFE224;color:#131313;font-weight:700;padding:14px 28px;border-radius:999px;text-decoration:none;font-size:14px;">Book a Free Discovery Call</a>
         </div>
         <p style="color:#3f3f46;font-size:12px;margin-top:32px;text-align:center;">DevMovers — Secure, Scalable &amp; High-Performance Digital Products</p>
       </div>

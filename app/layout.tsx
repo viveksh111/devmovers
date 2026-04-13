@@ -90,6 +90,8 @@ export default function RootLayout({
     <html
       lang="en"
       className={`dark ${plusJakartaSans.variable} ${inter.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <head>
         <link
@@ -97,7 +99,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-      <body className="bg-surface text-on-surface antialiased" suppressHydrationWarning>
+      <body className="bg-zinc-950 text-white antialiased" suppressHydrationWarning>
         {children}
       </body>
     </html>
